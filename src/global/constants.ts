@@ -1,0 +1,6 @@
+export const LOGIN_TOKEN = 'login/token'
+export const USER_INFO = 'userInfo'
+export const MENUS = 'menus'
+export const PERMISSION = 'permission'
+export const THEME_TOKEN = 'theme'
+export const GLOBAL_DATA = 'globalData'
