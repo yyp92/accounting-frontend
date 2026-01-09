@@ -1,0 +1,21 @@
+@import '../../theme/lightTheme.scss';
+@import '../../theme/darkTheme.scss';
+
+.noAuth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--bg-white-color);
+
+    :global {
+        .ant-result {
+            .ant-result-title  {
+                color: var(--text-color) !important;
+            }
+
+            .ant-result-subtitle {
+                color: var(--text-color-secondary) !important;
+            }
+        }
+    }
+}

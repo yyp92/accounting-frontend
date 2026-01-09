@@ -39,6 +39,9 @@ export const darkToken = {
         colorIcon: iconColor,
         colorBgSolidHover: activeColor2,
         colorTextQuaternary: iconColor,
+        
+        colorWarning: errorColor,
+        colorSuccess: successColor,
 
         colorPrimary: activeColor,
         colorPrimaryActive: activeColor,
@@ -63,6 +66,8 @@ export const darkToken = {
         controlItemBgHover: bgGreyColor,
         controlItemBgActiveHover: activeColor3,
         controlItemBgActive: activeColor3,
+
+        colorTextHeading: textColor,
     },
     components: {
         Button: {
@@ -280,6 +285,14 @@ export const darkToken = {
         },
         Cascader: {
             optionPadding: '5px 12px',
-        }
+            optionSelectedBg: activeColor3,
+            optionSelectedColor: activeColor,
+        },
+        Message: {
+            contentBg: bgColor
+        },
+        Upload: {
+            actionsColor: textColor
+        },
     }
 }

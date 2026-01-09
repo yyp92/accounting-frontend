@@ -1,15 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Button, Result } from 'antd';
+import { antdTokenStore } from '@/store/theme';
+import { getDarkTheme } from '@/utils';
+
+import styles from './index.module.scss'
+
 
 export const Page404: React.FC = () => {
+    const {isDark} =  antdTokenStore()
+
+    useEffect(() => {
+        getDarkTheme(isDark)
+    }, [isDark])
+
     return (
         <div
-            style={{
-                flex: '1',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center'
-            }}
+            className={styles.noFound}
         >
             <Result
                 status="404"
