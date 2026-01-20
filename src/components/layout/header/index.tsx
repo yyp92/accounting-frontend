@@ -120,9 +120,12 @@ export const Header: React.FC<HeaderProps> = ({ }) => {
 
                     <span>后台管理系统</span>
                 </div>
-                
+
                <Select
-                    style={{width: 160 }}
+                    style={{
+                        width: 160,
+                        marginLeft: 16
+                    }}
                     value={accountCompany?.id}
                     options={accountCompanyList.map((item) => ({value: item.value, label: item.name}))}
                     placeholder="请选择做账的公司"
