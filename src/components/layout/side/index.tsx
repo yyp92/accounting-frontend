@@ -1,6 +1,7 @@
-import React, {useEffect, useLayoutEffect} from 'react'
-import {Menu} from 'antd'
-import type { MenuProps } from 'antd';
+import {FC, useEffect, useLayoutEffect, useState} from 'react'
+import {Button, Menu} from 'antd'
+import type { MenuProps } from 'antd'
+import { DoubleLeftOutlined, DoubleRightOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons'
 import {useNavigate, useLocation} from 'react-router-dom'
 import {ComponentMap} from '@/router/router'
 import { menusStore } from '@/store/menus'
@@ -16,18 +17,20 @@ interface SideProps {
     [key: string]: any
 }
 
-export const Side: React.FC<SideProps> = () => {
+export const Side: FC<SideProps> = () => {
     const location = useLocation()
     const navigate = useNavigate()
     const {menus} = menusStore()
     const {token} = tokenStore()
 
     // 激活的父菜单
-    const [openKeys, setOpenKeys] = React.useState<string[]>([])
+    const [openKeys, setOpenKeys] = useState<string[]>([])
     // 激活的菜单项
-    const [selectedKeys, setSelectedKeys] = React.useState<string[]>([])
+    const [selectedKeys, setSelectedKeys] = useState<string[]>([])
     // 菜单
-    const [newMenuList, setNewMenuList] = React.useState<MenuItem[]>([])
+    const [newMenuList, setNewMenuList] = useState<MenuItem[]>([])
+    // 菜单展开收起
+    const [collapsed, setCollapsed] = useState<boolean>(false)
 
     useLayoutEffect(() => {
         const newMenuList = menus.map((item: any) => {
@@ -42,21 +45,23 @@ export const Side: React.FC<SideProps> = () => {
     }, [menus])
 
     useEffect(() => {
-        const {pathname} = location ?? {}
-        const newPathname = pathname.slice(1)
+        if (!collapsed) {
+            const {pathname} = location ?? {}
+            const newPathname = pathname.slice(1)
 
-        
-        const pathnameList = newPathname.split('/')
+            
+            const pathnameList = newPathname.split('/')
 
-        if (pathnameList.length === 1) {
-            setOpenKeys([])
-            setSelectedKeys([pathnameList[0]])
+            if (pathnameList.length === 1) {
+                setOpenKeys([])
+                setSelectedKeys([pathnameList[0]])
+            }
+            else if (pathnameList.length === 2 || pathnameList.length === 3) {
+                setOpenKeys([pathnameList[0]])
+                setSelectedKeys([pathnameList[1]])
+            }
         }
-        else if (pathnameList.length === 2 || pathnameList.length === 3) {
-            setOpenKeys([pathnameList[0]])
-            setSelectedKeys([pathnameList[1]])
-        }
-    }, [])
+    }, [collapsed])
 
 
     // ********* 操作 ********
@@ -78,23 +83,18 @@ export const Side: React.FC<SideProps> = () => {
         }
     }
 
+    const handleToggleCollapsed = () => {
+        setCollapsed((pre) => !pre)
+    }
+
 
     // ********* 渲染 ********
     return (
         <div className={styles.side}>
-            <div  className={styles.logo}>
-                <img
-                    src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
-                    alt="logo"
-                />
-
-                <span>后台管理系统</span>
-            </div>
-
             <Menu
                 className={styles.menu}
                 style={{
-                    width: 200,
+                    width: collapsed ? 50 : 200,
                     height: '100%'
                 }}
                 mode={'inline'}
@@ -103,7 +103,15 @@ export const Side: React.FC<SideProps> = () => {
                 selectedKeys={selectedKeys}
                 onOpenChange={onMenuItemOpenChange}
                 onClick={onMenuItemClick}
+                inlineCollapsed={collapsed}
             />
+
+            <Button
+                className={styles.collapsed}
+                onClick={handleToggleCollapsed}
+            >
+                {collapsed ? <DoubleRightOutlined /> : <DoubleLeftOutlined />}
+            </Button>
         </div>
     )
 }

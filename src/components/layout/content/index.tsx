@@ -88,10 +88,10 @@ const Content: React.FC<ContentProps> = ({}) => {
 
         return (
             <div className={styles.layoutContent}>
-                {!currentRouter?.showFullScreen && <Side />}
+                {!currentRouter?.showFullScreen && <Header />}
 
                 <div className={styles.wraper}>
-                    {!currentRouter?.showFullScreen && <Header />}
+                    {!currentRouter?.showFullScreen && <Side />}
 
                     <div className={styles.contentInner}>
                         <Outlet />

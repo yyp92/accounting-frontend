@@ -112,6 +112,15 @@ export const Header: React.FC<HeaderProps> = ({ }) => {
             <div
                 className={styles.left}
             >
+                <div  className={styles.logo}>
+                    <img
+                        src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
+                        alt="logo"
+                    />
+
+                    <span>后台管理系统</span>
+                </div>
+                
                <Select
                     style={{width: 160 }}
                     value={accountCompany?.id}

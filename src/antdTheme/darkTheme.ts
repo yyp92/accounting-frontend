@@ -116,6 +116,7 @@ export const darkToken = {
             horizontalItemSelectedBg: activeColor3,
             horizontalItemSelectedColor: activeColor,
             itemActiveBg: activeColor3,
+            subMenuItemBg: bgColor,
             itemMarginBlock: 4,
             itemMarginInline: 0,
             itemBorderRadius: 0,

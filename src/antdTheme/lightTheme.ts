@@ -117,6 +117,7 @@ export const lightToken = {
             horizontalItemSelectedBg: activeColor3,
             horizontalItemSelectedColor: activeColor,
             itemActiveBg: activeColor3,
+            subMenuItemBg: bgColor,
             itemMarginBlock: 4,
             itemMarginInline: 8,
             itemBorderRadius: 4,
